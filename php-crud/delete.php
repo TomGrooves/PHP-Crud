@@ -41,7 +41,7 @@ $dataID = $_GET['ID'];
 if ($_GET['confirmed']){
     $conn->query("DELETE FROM Users WHERE id = $dataID");
     echo "User has been deleted";
-    echo "<a href='../php-crud/index.php'>Return to start</a>";
+    echo "<a href='../php-crud/index.php'>Retuner til start</a>";
 }
 
 else{

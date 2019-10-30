@@ -32,19 +32,9 @@
 <?php
 
 
-
-
-
-
-
-
-
-
 //Landing page:   
 
 //"Create table med data"  
-
-
 
 //"To buttons ud for hvert row" 
 

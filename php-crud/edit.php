@@ -1,76 +1,68 @@
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit</title>
+    <title>Document</title>
 </head>
 <body>
-
+<form action="" method="post">
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password">
+    </p>
+    <p>
+        <label for="emailaddress">Email:</label>
+        <input type="text" name="email" id="email">
+    </p>
+    
+    <input type="submit" value="Submit">
+</form>
 
 <?php
+
 //Edit Page:
 
+//"Form med data fra bruger valgt." 
 include 'db.php';
 
-  if($pdo){
-      
-    $stmt = $pdo->query('SELECT * FROM data');
-    $data = $stmt->fetchAll();
-    }
 
+// Create a new instance of DB and Connect with user test and pass 1234.
+  $database = new DB();
+  $conn = $database->Connect("test", 1234);
 
-// PDO connection Config  data der hjælper med at connecte til database
-// database info
-$host="localhost";
-$dbName="user";
-$user = "root";
-$password = "";
-$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false];
-
-//"Form med data fra bruger valgt." 
-
-echo '
-    <form method="POST" style="display:grid; width: 10%;">
-    <input  name="name" placeholder="Name" type="text" />
-    <input  name="email" placeholder="E-mail" type="text" />
-    <input  name="password" placeholder="Password" type="text" />
-    <form method="POST" style="display:grid; width: 10%;">
-    <input  type="submit" value="Accept" />
-    <input  type="submit" value="Delete" />
-
-    </form>
-    ';
-
-    try  {
-    $pdo = new PDO("mysql:host=".$host.";dbName=".$dbName, $user, $password, $options);
-        // HVIS DE 3 INPUTS ER INDTASTET
-    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) 
+// Server
+$dataID = $_GET['ID'];
+ 
+try  {
+     // HVIS DE 3 INPUTS ER INDTASTET
+    if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) 
     {  
         // HER SÆTTER VI VARIABLERNE TIL AT VÆRE DET VI MODTAGER I INPUTS'NE
-        $name = $_POST['name'];
+        $name = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         // QUERY MED NAMED PLACEHOLDERS
-        $sql = "UPDATE user SET email = :email, password = :password WHERE name = :name";
+        $sql = "UPDATE Users SET username = :username, email = :email, passwrd = :passwrd WHERE id= $dataID";
         
-   $statement = $pdo->prepare($sql);
-   $statement->execute(array(':email' => $email, ':password' => $password, ':name' => $name));
+   $statement = $conn->prepare($sql);
+   $statement->execute(array(':email' => $email, ':passwrd' => $password, ':username' => $name));
+    echo "Bruger-id'et: ".$dataID." er opdateret";
+    echo "<a href='../php-crud/index.php'>Retuner til start</a>";
 
-    echo "Bruger-id'et: ".$name." fik ændret sin alder til: ".$email." og sin by til: ".$password;
     }    
  }
+ 
+ catch(PDOException $e)
+{ echo "Tilslutningsfejl: " . $e->getMessage();}
+  
 
- // set the PDO error mode to exception
-catch(PDOException $e)
-{ echo "Tilslutningsfejl: " . $e->getMessage();
-    
-}
 ?>
 </body>
 </html>
+

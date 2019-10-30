@@ -7,20 +7,55 @@
     <title>Document</title>
 </head>
 <body>
-
-
+<form action="" method="post">
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password">
+    </p>
+    <p>
+        <label for="emailaddress">Email:</label>
+        <input type="text" name="email" id="email">
+    </p>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
 <?php
 
-//Create page:  
+  include 'db.php';
 
-//“Lav form med input fields.” 
+// Create a new instance of DB and Connect with user test and pass 1234.
+  $database = new DB();
+  $conn = $database->Connect("test", 1234);
+  if ($conn){
+    //echo "Connected to the database";
 
-//“to buttons I bunden”  
+// Attempt insert query execution
+try{
+    // Create prepared statement
+    $sql = "INSERT INTO Users (username, email, passwrd) VALUES (:username_var, :password_var, :email_var)";
+    $stmt = $conn->prepare($sql);
+    
+    // Bind parameters to statement
+    $stmt->bindParam(':username_var', $_POST['username']);
+    $stmt->bindParam(':password_var', $_POST['password']);
+    $stmt->bindParam(':email_var', $_POST['email']);
+    
+    // Execute the prepared statement
+    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
+        $stmt->execute();
+        echo "<br>Records inserted successfully.";
+        echo "<a href='../php-crud/index.php'>Return to start</a>";
 
-//“tag user input.value og INSERT INTO Sql databasen.” 
-
-//“Open new page med accept/cancel option. Hvis user vælger accept. Så send data, ellers gå tilbage til startsiden.” 
-
+    }
+} catch(PDOException $e){
+    die("<br>ERROR: Could not able to execute $sql. " . $e->getMessage());
+}
+}
 ?>
 </body>
 </html>
