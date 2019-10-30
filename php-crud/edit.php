@@ -11,9 +11,7 @@
 
 <?php
 
-//Edit Page:  
-
-  
+//Edit Page:
 
 //"Form med data fra bruger valgt." 
 

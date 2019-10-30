@@ -19,7 +19,7 @@ class DB
     {
         try {
 
-            $dsn = "mysql:dbname=User_DB; host=localhost";
+            $dsn = "mysql:dbname=USER_DB; host=localhost";
 
             $options  = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

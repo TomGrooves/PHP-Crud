@@ -44,18 +44,13 @@
 
 //"Create table med data"  
 
+
+
 //"To buttons ud for hvert row" 
 
 //"a tags med links ved onclick"  
 
 //"button til at lave new user."  
-
-
-
-
-
-
-
 
 
 include 'db.php';
@@ -66,95 +61,18 @@ include 'db.php';
   if ($conn){
     echo "Connected to the database";
 
-    if ($_POST['selection'] == "disconnect"){
-      $option = 0;
-      echo "Connection closed";
-      $conn = $database->Close();
-    }
-  
-  // Check what user has selected in selection box
-    if ($_POST['selection'] == "getusers"){
-      $option = 0;
-    }
-    if ($_POST['selection'] == "getpass"){
-      $option = 1;
-    }
-    if ($_POST['selection'] == "getid"){
-      $option = 2;
-    }
-    if ($_POST['selection'] == "getemail"){
-      $option = 3;
-    }
-    
-  // Switch on Option variable. 
-
-  switch ($option){
-  
-  //Case 0
-      case 0:
-      $res = $conn->query("SELECT username FROM Users");
-      $data = $res->fetchAll();
-  
-      echo ('<h2>All user names</h2>');     
-      foreach($data as $row){
-        echo ($row['username']." "."<br>");
-      }
-      break;
-
-  //Case 1
-      case 1: 
-      $res = $conn->query('SELECT passwrd FROM Users');
-      $data = $res->fetchAll();
-      
-      echo ('<h2>All user passwords</h2>');     
-      foreach($data as $row){
-        echo ($row['passwrd']." "."<br>");
-      }
-      break;
-    
-  //Case 2
-      case 2: 
-      $res = $conn->query('SELECT id FROM Users');
-      $data = $res->fetchAll();
-      
-      echo ('<h2>All user ID\'s</h2>');     
-      foreach($data as $row){
-        echo ($row['id']." "."<br>");
-      }
-      break;
-      
-  //Case 3
-      case 3: 
-      $res = $conn->query('SELECT email FROM Users');
-      $data = $res->fetchAll();
-  
-      echo ('<h2>All user emails</h2>');     
-      foreach($data as $row){
-        echo ($row['email']." "."<br>");
-      } 
-      break;
-    }
-  }
-
-  else {
-    echo
-     $conn;
-   }
-  
-
-   // Function not working
-  function checkOption($selected){
-
-    $res = $conn->query('SELECT '.".$selected. ".'FROM Users');
+    $res = $conn->query('SELECT * FROM Users');
     $data = $res->fetchAll();
 
-    echo ('<h2>All users</h2>');     
+    echo '<h2>All users</h2><br><table>';     
     foreach($data as $row){
-      echo ($row['id']." " . $row['username']." " .$row['email']." ".$row['password']." "."<br>");
+      echo "<tr><td>";
+      echo ($row['id']." " . $row['username']." " .$row['email']." ".$row['password']." "."<a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'>Edit</a><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'>Delete</a>");
+      echo "</td></tr>";
     }
-
+    echo "</table>";
+    echo "<a name='edit' href='../php-crud/add.php'>Create new user</a>";
   }
-
 ?>
  </body>
 
