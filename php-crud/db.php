@@ -15,11 +15,11 @@ class DB
     protected $conn = null;
 
     // En function til at starte connectionen, med $user og $password
-    public function Connect($user, $password)
+    public function Connect($user, $password, $dbname,$hostname)
     {
         try {
 
-            $dsn = "mysql:dbname=USER_DB; host=localhost";
+            $dsn = "mysql:dbname=".$dbname."; host=".$hostname.";";
 
             $options  = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
