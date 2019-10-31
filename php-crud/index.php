@@ -6,28 +6,11 @@
      <title>CRUD</title>
      <meta name="description" content="DESCRIPTION">
      <link rel="stylesheet" href="style.css">
-     <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
  </head>
 
  <body>
-
-<div class="main">
-<div class="sidebar">
-<form method="post" action="">
-  <select name="selection">
-  <option value="getusers">Fetch Usernames</option>
-  <option value="getid">Fetch ID's</option>
-  <option value="getpass">Fetch Passwords</option>
-  <option value="getemail">Fetch Emails</option>
-  <option value="disconnect">Disconnect</option>
-  <!--<input placeholder="type something here" value="input">-->
-  <input type="submit" name="submit" value="Submit" />
-  </select>
-</form>
-</div>
-<div class="main-container"></div>
-
-</div>
 
 <?php
 
@@ -54,15 +37,49 @@ include 'db.php';
     $res = $conn->query('SELECT * FROM Users');
     $data = $res->fetchAll();
 
-    echo '<h2>All users</h2><br><table>';     
-    foreach($data as $row){
-      echo "<tr><td>";
-      echo ($row['id']." " . $row['username']." " .$row['email']." ".$row['password']." "."<a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'>Edit</a><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'>Delete</a>");
-      echo "</td></tr>";
-    }
-    echo "</table>";
-    echo "<a name='edit' href='../php-crud/add.php'>Create new user</a>";
+    echo '<h2>CRUD Brugerstyrings system</h2><br>';     
+    echo "<div class='grid'> ";
+    
+    echo "<div class='holder'><h3>ID</h3>";
+    foreach ($data as $row){
+    echo "<div class='center'>".$row['id']."</div>";
   }
+  echo "</div>"; 
+
+    echo "<div class='holder'><h3>Brugernavn</h3>";
+    foreach ($data as $row){
+    echo "<div class='center'>".$row['username']."</div>";
+    }
+    echo "</div>";
+    
+    echo "<div class='holder'><h3>Email</h3>";
+    foreach ($data as $row){
+      echo "<div class='center'>".$row['email']."</div>";
+    }
+    echo "</div>";
+
+    echo "<div class='holder'><h3>Password</h3>";
+    foreach ($data as $row){
+      echo "<div class='center'>".$row['passwrd']."</div>";
+    }
+    echo "</div>";
+
+
+    echo "<div class='holder'><h3>Rediger</h3>";
+    foreach ($data as $row){
+    echo "<div><a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'><button class='buttonInput'>Rediger</button></a></div>";
+    }
+    echo "</div>";
+
+    echo "<div class='holder'><h3>Fjern</h3>";
+    foreach ($data as $row){
+    echo "<div><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'><button class='buttonInput'>Fjern</button></a></div>";
+    }
+    echo" 
+    </div></div>";
+    echo "<div class='create'> <a name='edit' href='../php-crud/add.php'><button class='createButton'>Opret ny bruger</button></a></div>";
+  }
+
 ?>
  </body>
 
