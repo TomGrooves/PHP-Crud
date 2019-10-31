@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <title>CRUD</title>
+
 </head>
 <body>
 
@@ -31,7 +32,9 @@ $dataID = $_GET['ID'];
 
 if ($_GET['confirmed']){
     $conn->query("DELETE FROM Users WHERE id = $dataID");
+
     echo "<h3 class='center'>Brugeren er fjernet fra databasen</h3>";
+
     echo "<div class='center-div2'><a href='../php-crud/index.php'><button class='buttonInput havartiOst'>Tilbage til start</button></a></div>";
 }
 
@@ -42,16 +45,19 @@ else{
     $confirm = false;
     
     // View
+
     echo "<div class='center-div2'><h2>Bekræft sletning</h2>";
     echo "<p class='center'>Er du sikker på at du vil slette: ";
     foreach ($dataAll as $row){
         
         echo ($row['username']);
         
+
     }
     echo " ?</p>
     <br><br>"; 
     
+
     echo "<div><h2>Brugernavn</h2>";
     foreach ($dataAll as $row){
         echo '<div class="center">';
@@ -71,6 +77,7 @@ else{
         echo '<div class="center">';
         echo ($row['passwrd']);
         echo '</div>';
+
     }
 
     echo "</div>";

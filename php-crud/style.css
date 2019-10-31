@@ -17,6 +17,7 @@
     width: 80%;
     gap: 8px;
     margin:auto;
+
 }
 
 .formButton{
@@ -140,6 +141,7 @@ box-shadow: 7px 10px 14px 0px rgba(0,0,0,0.67);
     margin-left:auto;
     margin-right:auto;
     margin-top: 5%;
+
     border-radius: 5px;
 }
 .create3{
@@ -149,6 +151,7 @@ box-shadow: 7px 10px 14px 0px rgba(0,0,0,0.67);
     border-radius: 5px;
     margin-top: 15%;
 }
+
 .createButton{
     background-color: #222;
     width: auto;
@@ -168,10 +171,12 @@ box-shadow: 7px 10px 14px 0px rgba(0,0,0,0.67);
     font-size: 0.9vw;
 }
 
+
 .buttonInput:hover{
     background-color: #eee;
     color: black;
 }
+
 .buttonInput2:hover{
     background-color: #eee;
     color: black;
@@ -180,3 +185,4 @@ box-shadow: 7px 10px 14px 0px rgba(0,0,0,0.67);
     background-color: #eee;
     color: black;
 }
+

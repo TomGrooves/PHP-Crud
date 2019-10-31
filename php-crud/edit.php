@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
+
     <title>CRUD</title>
 </head>
 <body>
@@ -47,7 +48,9 @@
 <span class="error"><?php echo $emailErr;?></span>
 <br>
 <input class="formButton" type="submit" value="Rediger bruger">
+
 </form>
+</div>
 
 <?php
 
@@ -87,6 +90,7 @@ try {
         // echo "Opdater bruger med navnet:".
         else
         {  
+
         // HER SÆTTER VI VARIABLERNE TIL AT VÆRE DET VI MODTAGER I INPUTS'NE
             $name = $_POST['username'];
             $email = $_POST['email'];
@@ -107,6 +111,7 @@ try {
         }
     }
 }
+
 
 
 catch(PDOException $e)

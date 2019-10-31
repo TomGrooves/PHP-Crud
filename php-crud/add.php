@@ -15,15 +15,17 @@
 <form class="theForm" action="" method="post">
     
         <label for="username">Brugernavn:</label>
+
         <input type="text" name="username" id="username">
         <label for="password">Password:</label>
         <input type="text" name="password" id="password">
         <label for="emailaddress">Email:</label>
         <input type="text" name="email" id="email">
     
+
     <input class="formButton" type="submit" value="Opret bruger">
 </form>
-
+</div>
 </body>
 </html>
 <?php
@@ -50,6 +52,7 @@ try{
     // Execute the prepared statement
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
         $stmt->execute();
+
         echo "<br><div class='center-div1' >Brugeren er tilføjet til databasen.";
         echo "<div class='center-div1' style='margin-top: -50px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
 
@@ -57,6 +60,7 @@ try{
     else{
         echo "<br><div class='center-div1' >Indtast nye brugeroplysninger.";
         echo "<div class='center-div1' style='margin-top: -20px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
+
 
     }
 } catch(PDOException $e){
