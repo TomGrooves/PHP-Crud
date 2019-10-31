@@ -6,7 +6,6 @@
      <title>CRUD</title>
      <meta name="description" content="DESCRIPTION">
      <link rel="stylesheet" href="style.css">
-     <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
  </head>
@@ -38,7 +37,9 @@ include 'db.php';
     $res = $conn->query('SELECT * FROM Users');
     $data = $res->fetchAll();
 
-    echo '<h2>All users</h2><br>';     
+
+    echo '<h2>CRUD Brugerstyrings system</h2><br>';     
+
     echo "<div class='grid'> ";
     
     echo "<div class='holder'><h3>ID</h3>";
@@ -47,7 +48,9 @@ include 'db.php';
   }
   echo "</div>"; 
 
-    echo "<div class='holder'><h3>Username</h3>";
+
+    echo "<div class='holder'><h3>Brugernavn</h3>";
+
     foreach ($data as $row){
     echo "<div class='center'>".$row['username']."</div>";
     }
@@ -65,20 +68,20 @@ include 'db.php';
     }
     echo "</div>";
 
-
-    echo "<div class='holder'><h3>Edit</h3>";
+    echo "<div class='holder'><h3>Rediger</h3>";
     foreach ($data as $row){
-    echo "<div><a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'><button class='buttonInput'>Edit</button></a></div>";
+    echo "<div><a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'><button class='buttonInput'>Rediger</button></a></div>";
     }
     echo "</div>";
 
-    echo "<div class='holder'><h3>Delete</h3>";
+    echo "<div class='holder'><h3>Fjern</h3>";
     foreach ($data as $row){
-    echo "<div><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'><button class='buttonInput'>Delete</button></a></div>";
+    echo "<div><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'><button class='buttonInput'>Fjern</button></a></div>";
     }
     echo" 
     </div></div>";
-    echo "<div class='create'> <a name='edit' href='../php-crud/add.php'><button class='createButton'>Create new user</button></a></div>";
+    echo "<div class='create'> <a name='edit' href='../php-crud/add.php'><button class='createButton'>Opret ny bruger</button></a></div>";
+
   }
 
 ?>

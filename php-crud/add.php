@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>CRUD</title>
 </head>
 <body>
 <h2>Ny Bruger</h2>
-<div class="center-div1">
+<div class="center-div2">
 <form class="theForm" action="" method="post">
     
-        <label for="username">Username:</label>
+        <label for="username">Brugernavn:</label>
+
         <input type="text" name="username" id="username">
         <label for="password">Password:</label>
         <input type="text" name="password" id="password">
         <label for="emailaddress">Email:</label>
         <input type="text" name="email" id="email">
     
-    <input class="formButton" type="submit" value="Submit">
+
+    <input class="formButton" type="submit" value="Opret bruger">
 </form>
 </div>
 </body>
@@ -50,8 +52,15 @@ try{
     // Execute the prepared statement
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
         $stmt->execute();
-        echo "<br><div class='center-div1' style='margin-top: -85px'>Brugeren er tilføjet til databasen.</div>";
-        echo "<div class='center-div2'><a href='../php-crud/index.php'><button class='buttonInput havartiOst'>Tilbage til start</button></a></div>";
+
+        echo "<br><div class='center-div1' >Brugeren er tilføjet til databasen.";
+        echo "<div class='center-div1' style='margin-top: -50px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
+
+    }
+    else{
+        echo "<br><div class='center-div1' >Indtast nye brugeroplysninger.";
+        echo "<div class='center-div1' style='margin-top: -20px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
+
 
     }
 } catch(PDOException $e){
@@ -59,5 +68,6 @@ try{
 }
 }
 ?>
+</div>
 </body>
 </html>
