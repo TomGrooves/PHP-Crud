@@ -52,9 +52,8 @@ try  {
         
    $statement = $conn->prepare($sql);
    $statement->execute(array(':email' => $email, ':passwrd' => $password, ':username' => $name));
-    echo "Bruger-id'et: ".$dataID." er opdateret";
-    echo "<a href='../php-crud/index.php'>Retuner til start</a>";
-
+    echo "Bruger-id'et: ".$dataID." er opdateret <br>
+    <a href='../php-crud/index.php'>Retuner til start</a>";
     }    
  }
  
