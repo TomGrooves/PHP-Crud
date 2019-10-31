@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
-<form action="" method="post">
-    <p>
+<h2>Ny Bruger</h2>
+<div class="center-div1">
+<form class="theForm" action="" method="post">
+    
         <label for="username">Username:</label>
         <input type="text" name="username" id="username">
-    </p>
-    <p>
         <label for="password">Password:</label>
         <input type="text" name="password" id="password">
-    </p>
-    <p>
         <label for="emailaddress">Email:</label>
         <input type="text" name="email" id="email">
-    </p>
-    <input type="submit" value="Submit">
+    
+    <input class="formButton" type="submit" value="Submit">
 </form>
+</div>
 </body>
 </html>
 <?php
@@ -48,8 +50,8 @@ try{
     // Execute the prepared statement
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
         $stmt->execute();
-        echo "<br>Records inserted successfully.";
-        echo "<a href='../php-crud/index.php'>Return to start</a>";
+        echo "<br><div class='center-div1' style='margin-top: -85px'>Brugeren er tilføjet til databasen.</div>";
+        echo "<div class='center-div2'><a href='../php-crud/index.php'><button class='buttonInput havartiOst'>Tilbage til start</button></a></div>";
 
     }
 } catch(PDOException $e){
