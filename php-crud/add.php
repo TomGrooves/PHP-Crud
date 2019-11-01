@@ -13,55 +13,65 @@
 <h2>Ny Bruger</h2>
 <div class="center-div2">
 <form class="theForm" action="" method="post">
-    
         <label for="username">Brugernavn:</label>
         <input placeholder="indtast brugernavn" type="text" name="username" id="username">
         <label for="password">Password:</label>
         <input placeholder="indtast password" type="text" name="password" id="password">
         <label for="emailaddress">Email:</label>
         <input placeholder="indtast email" type="text" name="email" id="email">
-    
     <input class="formButton" type="submit" value="Opret bruger">
 </form>
-
 </body>
 </html>
 <?php
 
-  include 'db.php';
+include 'includes.php';
 
-// Create a new instance of DB and Connect with user test and pass 1234.
-  $database = new DB();
-  $conn = $database->Connect("test", 1234, "USER_DB", "localhost");
-  if ($conn){
-    //echo "Connected to the database";
+// kør funktionen $conn for at starte forbindelsen.
+$conn = Functions::connect();
 
-// Attempt insert query execution
-try{
-    // Create prepared statement
-    $sql = "INSERT INTO Users (username, email, passwrd) VALUES (:username_var, :password_var, :email_var)";
-    $stmt = $conn->prepare($sql);
+// hvis forbindelsen kører.
+if ($conn){
+
+    try{
+
+    // hvis serveren modtager en post request
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // sæt variablerne til at være hvad der er i form felterne
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
     
-    // Bind parameters to statement
-    $stmt->bindParam(':username_var', $_POST['username']);
-    $stmt->bindParam(':password_var', $_POST['password']);
-    $stmt->bindParam(':email_var', $_POST['email']);
-    
-    // Execute the prepared statement
+    // hvis alle felter er udfyldt (tjekkes med isset funktion).
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
-        $stmt->execute();
-        echo "<br><div class='center-div1' >Brugeren er tilføjet til databasen.";
+        
+        // kør funktionen addNewUser med de gemte variabler og gem dens return som $error variablen.
+        $error = Functions::addNewUser($conn, $username, $email, $password);
+        
+        // hvis $error er tom, så vis at brugeren er tilføjet til databasen
+        if ($error == ""){
+        echo "<br><div class='center-div1' >Brugeren: ".$username." tilføjet til databasen.";
         echo "<div class='center-div1' style='margin-top: -50px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
-
+        }
+        // hvis ikke $error er tom så vis $error
+        else {
+            echo "<br><div class='center-div1' >".$error."";
+            echo "<div class='center-div1' style='margin-top: -50px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
+           
+        }
     }
+}
+
     else{
         echo "<br><div class='center-div1' >Indtast nye brugeroplysninger.";
         echo "<div class='center-div1' style='margin-top: -20px;'><a href='../php-crud/index.php'><button class='buttonInput havartiOst' style='margin-top: 15%;margin-bottom: 5%;'>Tilbage til start</button></a></div></div>";
-
+        
     }
-} catch(PDOException $e){
-    die("<br>ERROR: Could not able to execute $sql. " . $e->getMessage());
 }
+
+ catch(PDOException $e){
+    die("<br>ERROR: Could not able to execute $sql. " . $e->getMessage());}
 }
 ?>
 </div>
