@@ -9,41 +9,29 @@
      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
      <title>CRUD</title>
  </head>
-
  <body>
 
 <?php
 
+try {
 
-//Landing page:   
+// Inkluder alle eksterne filer
+include 'includes.php';
 
-//"Create table med data"  
+// Gem $conn som resultatet af funktionen connect
+// Gem $data som resultatet af functionen getAllUsers
+$conn = Functions::connect();
+$data = Functions::getAllUsers($conn);
 
-//"To buttons ud for hvert row" 
-
-//"a tags med links ved onclick"  
-
-//"button til at lave new user."  
-
-
-include 'db.php';
-
-// Create a new instance of DB and Connect with user test and pass 1234.
-  $database = new DB();
-  $conn = $database->Connect("test", 1234, "USER_DB", "localhost");
-  if ($conn){
-    echo "Connected to the database";
-
-    $res = $conn->query('SELECT * FROM Users');
-    $data = $res->fetchAll();
-
+// Lav et grid der holder de forskellige kategorier og indsæt med foreach loop fra $data som holder Alle users.
     echo '<h2>CRUD Brugerstyrings system</h2><br>';     
     echo "<div class='grid'> ";
-    
     echo "<div class='holder'><h3>ID</h3>";
+
     foreach ($data as $row){
     echo "<div class='center'>".$row['id']."</div>";
   }
+
   echo "</div>"; 
 
     echo "<div class='holder'><h3>Brugernavn</h3>";
@@ -64,22 +52,26 @@ include 'db.php';
     }
     echo "</div>";
 
-
+    // Opret to knapper der sender det pågældende $row[id] med til den næste side som keyvalue af ID. 
     echo "<div class='holder'><h3>Rediger</h3>";
     foreach ($data as $row){
-    echo "<div><a name='edit' href='../php-crud/edit.php?ID=".$row['id']."'><button class='buttonInput'>Rediger</button></a></div>";
+      echo "<div><a name='edit' href='../php-crud/update.php?ID=".$row['id']."'><button class='buttonInput'>Rediger</button></a></div>";
     }
     echo "</div>";
 
     echo "<div class='holder'><h3>Fjern</h3>";
     foreach ($data as $row){
-    echo "<div><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'><button class='buttonInput'>Fjern</button></a></div>";
+      echo "<div><a name='delete'  href='../php-crud/delete.php?ID=".$row['id']."'><button class='buttonInput'>Fjern</button></a></div>";
     }
     echo" 
     </div></div>";
     echo "<div class='create'> <a name='edit' href='../php-crud/add.php'><button class='createButton'>Opret ny bruger</button></a></div>";
+    
   }
 
+    catch(PDOException $e)
+    { echo "Tilslutningsfejl: " . $e->getMessage();}
+    
 ?>
  </body>
 
