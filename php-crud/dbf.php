@@ -18,9 +18,41 @@ class Functions
     // Funktion til at tilslutte til databasen (HER SKAL DU ÆNDRE VARIABLER FOR AT TILSLUTTE TIL DIN EGEN DB)
     public static function connect(){
         $database = new DB();
-        $conn = $database->Connect("test", 1234, "USER_DB", "localhost");
+        $conn = $database->Connect("test", "1234", "USER_DB", "localhost");
         return $conn;
     }
+
+    public static function connectNew($username, $password, $dbname, $server){
+        
+        try {
+        if (!$username = '' && !$password = '' && !$dbname = '' && !$server = ''){
+            
+            $usernameInfo = $username;
+            $passwordInfo = $password;
+            $dbnameInfo = $dbname;
+            $serverInfo = $server;
+
+            $database = new DB();
+        
+        $conn = $database->Connect($usernameInfo, $passwordInfo, $dbnameInfo, $serverInfo);
+        var_dump($usernameInfo, $passwordInfo, $dbnameInfo, $serverInfo);
+
+        
+        return $conn;
+        }
+        else{
+            $conn = "Kan ikke forbinde til database. Tjek log in oplysninger og prøv igen";
+            var_dump($usernameInfo, $passwordInfo, $dbnameInfo, $serverInfo);
+            return $conn;
+        
+        }
+    }
+
+    catch(PDOException $e){
+        die("<br>ERROR: Could not able to execute $sql. " . $e->getMessage());
+    }
+}
+
    
     // Funktion til at få alle brugere ud af databasen
     public static function getAllUsers($conn){
